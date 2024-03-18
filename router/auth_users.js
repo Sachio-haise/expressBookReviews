@@ -70,7 +70,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
     }
     book.reviews.push({ username: req.user.username, review: review });
 
-    return res.status(201).json({ message: "Review added successfully", book: JSON.stringify(book) });
+    return res.status(201).json({ message: "Review added successfully", book });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -85,7 +85,7 @@ regd_users.delete("/auth/review/:isbn", (req, res) => {
       return res.status(404).json({ book: null, message: "Book review not found" });
     }
     book.reviews = book.reviews.filter(review => review.username !== req.user.username);
-    return res.status(200).json({ message: "Review deleted successfully", book: JSON.stringify(book) });
+    return res.status(200).json({ message: "Review deleted successfully", book });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

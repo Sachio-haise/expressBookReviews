@@ -31,7 +31,7 @@ public_users.post("/register", (req, res) => {
 // Get the book list available in the shop
 public_users.get('/', async (req, res) => {
   try {
-    return res.status(200).json({ books: JSON.stringify(books) });
+    return res.status(200).json({ books });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -42,9 +42,8 @@ public_users.get('/', async (req, res) => {
 public_users.get("/books", async (req, res) => {
   try {
     const response = await axios.get("http://localhost:5000");
-    const data = response.data;
-    const books = JSON.parse(data.books);
-    return res.status(200).json({ books: JSON.stringify(books) });
+    const { books } = response.data;
+    return res.status(200).json({ books });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -58,7 +57,7 @@ public_users.get('/isbn/:isbn', function (req, res) {
     if (!book) {
       return res.status(404).json({ book: null, message: "Book not found" });
     }
-    return res.status(200).json({ book: JSON.stringify(book) });
+    return res.status(200).json({ book });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -69,9 +68,8 @@ public_users.get("/books/isbn/:isbn", async (req, res) => {
   try {
     const isbn = req.params.isbn;
     const response = await axios.get(`http://localhost:5000/isbn/${isbn}`);
-    const data = response.data;
-    const book = JSON.parse(data.book);
-    return res.status(200).json({ book: JSON.stringify(book) });
+    const { book } = response.data;
+    return res.status(200).json({ book });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -86,7 +84,7 @@ public_users.get('/author/:author', function (req, res) {
     if (!book) {
       return res.status(404).json({ book: null, message: "Book not found" });
     }
-    return res.status(200).json({ book: JSON.stringify(book) });
+    return res.status(200).json({ book });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -98,9 +96,8 @@ public_users.get("/books/author/:author", async (req, res) => {
   try {
     const author = req.params.author;
     const response = await axios.get(`http://localhost:5000/author/${author}`);
-    const data = response.data;
-    const book = JSON.parse(data.book);
-    return res.status(200).json({ book: JSON.stringify(book) });
+    const { book } = response.data;
+    return res.status(200).json({ book });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -114,7 +111,7 @@ public_users.get('/title/:title', function (req, res) {
     if (!book) {
       return res.status(404).json({ book: null, message: "Book not found" });
     }
-    return res.status(200).json({ book: JSON.stringify(book) });
+    return res.status(200).json({ book });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -125,9 +122,8 @@ public_users.get("/books/title/:title", async (req, res) => {
   try {
     const title = req.params.title;
     const response = await axios.get(`http://localhost:5000/title/${title}`);
-    const data = response.data;
-    const book = JSON.parse(data.book);
-    return res.status(200).json({ book: JSON.stringify(book) });
+    const { book } = response.data;
+    return res.status(200).json({ book });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -143,7 +139,7 @@ public_users.get('/review/:isbn', function (req, res) {
     }
     const book_reviews = book.reviews;
     const book_isbn = book.isbn;
-    return res.status(200).json({ reviews: JSON.stringify(book_reviews), isbn: book_isbn });
+    return res.status(200).json({ reviews: book_reviews, isbn: book_isbn });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
