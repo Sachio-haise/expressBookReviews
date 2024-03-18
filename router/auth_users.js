@@ -61,7 +61,6 @@ regd_users.post("/login", (req, res) => {
 // Add a book review
 regd_users.put("/auth/review/:isbn", (req, res) => {
   try {
-    console.log(req.user);
     const { review } = req.body;
     const { isbn } = req.params;
     const book = Object.values(books).find(book => book.isbn === isbn);

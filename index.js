@@ -17,8 +17,9 @@ app.use("/customer/auth/*", function auth(req,res,next){
         if(!err){
             req.user = user;
             next();
+        }else{
+          return res.status(403).json({ message: "Unauthorized." });
         }
-        return res.status(403).json({message:"Unauthorized."});
     })
     next();
   }else{
